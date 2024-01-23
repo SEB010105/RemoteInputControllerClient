@@ -50,7 +50,7 @@
     }
 
     #enter {
-        grid-row: 3 / 5;
+        grid-row: 4 / 6;
         grid-column: 14;
     }
 

@@ -14,11 +14,6 @@
 <main>
     <Options />
 
-    <KeyboardButton key="help" toggleable={false}/>
-    <KeyboardButton key="volumemute" toggleable={false}/>
-    <KeyboardButton key="volumedown" toggleable={false}/>
-    <KeyboardButton key="volumeup" toggleable={false}/>
-
     <div class="absolute w-screen bottom-0">
         <Keyboard />
     </div>
