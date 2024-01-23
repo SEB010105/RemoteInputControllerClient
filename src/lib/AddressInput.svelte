@@ -3,7 +3,7 @@
     import {ip, port} from "./adressStore";
 
     let ipInput: string = "localhost";
-    let portInput: number = "5000";
+    let portInput: number = 5000;
 </script>
 
 <div>

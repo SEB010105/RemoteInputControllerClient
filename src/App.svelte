@@ -7,5 +7,8 @@
 <main>
   <AddressInput />
 
-  <KeyPressButton content="W"/>
+  <KeyPressButton key="W"/>
+  <KeyPressButton key="A"/>
+  <KeyPressButton key="S"/>
+  <KeyPressButton key="D"/>
 </main>
