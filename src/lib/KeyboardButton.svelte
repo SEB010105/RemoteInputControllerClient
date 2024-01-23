@@ -8,9 +8,6 @@
 
     let toggled:boolean;
 
-    function handlePress() {
-        post($address + "/press", {key})
-    }
 
     function handleToggle() {
         if (toggled)
@@ -20,12 +17,21 @@
 
         toggled = !toggled;
     }
+
+    function handleDown() {
+        post($address + "/down", {key})
+    }
+
+    function handleUp() {
+        post($address + "/up", {key})
+    }
 </script>
 
 <button
         id={key}
         class={(toggled) ? "bg-gray-700" : "bg-gray-600"}
-        on:click={toggleable ? handleToggle : handlePress}
+        on:mousedown={toggleable ? handleToggle : handleDown}
+        on:mouseup={toggleable ? null : handleUp}
 >{key}</button>
 
 <style>
