@@ -1,12 +1,11 @@
 <script lang="ts">
     import AddressInput from "./AddressInput.svelte";
     import OptionCheckbox from "./OptionCheckbox.svelte";
-
-    let keyboardSyncingEnabled: boolean;
+    import {keyboardSyncingEnabled} from "./optionsStore";
 </script>
 
 <div class="flex flex-col items-center">
     <AddressInput />
 
-    <OptionCheckbox text="Enable keyboard syncing" bindTo={keyboardSyncingEnabled}/>
+    <OptionCheckbox text="Enable keyboard syncing" store={keyboardSyncingEnabled}/>
 </div>
