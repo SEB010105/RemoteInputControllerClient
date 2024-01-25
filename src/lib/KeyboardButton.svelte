@@ -1,38 +1,54 @@
 <script lang="ts">
 
-    import {post} from "./publicFunctions";
+    import {post, setAllKeyIndexes} from "./publicFunctions";
     import {address} from "./adressStore";
+    import {Key} from "./key";
 
-    export let key:string;
-    export let toggleable:boolean;
-
-    let toggled:boolean;
-
+    export let key: Key;
 
     function handleToggle() {
-        if (toggled)
-            post($address + "/up", {key});
+        if (key.toggled)
+            post($address + "/up", {key: key.currentKey});
         else
-            post($address + "/down", {key});
+            post($address + "/down", {key: key.currentKey});
 
-        toggled = !toggled;
+        key.toggle();
     }
 
     function handleDown() {
-        post($address + "/down", {key})
+        if (key.toggleable) {
+            post($address + (key.toggled ? "/up" : "/down"), {key: key.currentKey});
+            key.toggle();
+        } else {
+            post($address + "/down", {key: key.currentKey});
+        }
     }
 
     function handleUp() {
-        post($address + "/up", {key})
+        post($address + "/up", {key: key.currentKey});
     }
+
+    let styling: string;
+    let content: string;
+
+    key.toggled.subscribe(t => {
+        styling = t ? "bg-gray-700" : "bg-gray-600";
+
+        if (key.toggleFunctionality)
+            key.toggleFunctionality(t);
+    });
+
+    key.content.subscribe(c =>
+        content = c
+    );
 </script>
 
 <button
-        id={key}
-        class={(toggled) ? "bg-gray-700" : "bg-gray-600"}
-        on:mousedown={toggleable ? handleToggle : handleDown}
-        on:mouseup={toggleable ? null : handleUp}
->{key}</button>
+        id={key.currentKey}
+        class={styling}
+        on:mousedown={handleDown}
+        on:mouseup={handleUp}
+>{@html content}</button>
 
 <style>
     button {
@@ -43,6 +59,18 @@
         margin: 0.2rem;
         border-bottom: 0.3rem solid;
         border-bottom-color: theme("colors.gray.700");
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+        button {
+            padding: 0.3rem;
+            font-size: 0.5rem;
+        }
     }
 
     button:hover {
@@ -61,6 +89,6 @@
     }
 
     #space {
-        grid-column: 4 / 11;
+        grid-column: 5 / 11;
     }
 </style>

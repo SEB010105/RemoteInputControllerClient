@@ -4,8 +4,6 @@
     import {address} from "./lib/adressStore";
     import Keyboard from "./lib/Keyboard.svelte";
     import Options from "./lib/Options.svelte";
-    import TextInput from "./lib/TextInput.svelte";
-    import LiveTextInput from "./lib/LiveTextInput.svelte";
     import {keyboardSyncingEnabled} from "./lib/optionsStore";
 
     function onKeyDown(event: KeyboardEvent) {
@@ -19,9 +17,6 @@
 
 <main>
     <Options />
-
-    <TextInput />
-    <LiveTextInput />
 
     <div class="absolute w-screen bottom-0">
         <Keyboard />

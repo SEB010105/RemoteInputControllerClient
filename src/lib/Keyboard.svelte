@@ -1,19 +1,46 @@
 <script lang="ts">
     import KeyboardButton from "./KeyboardButton.svelte";
+    import {keys} from "./keys";
 
-    const keys: string[] = "apps pageup pagedown browserback browserforward browserhome browserrefresh browsersearch prevtrack playpause nexttrack volumemute volumedown volumeup esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 del ^ 1 2 3 4 5 6 7 8 9 0 ß ´ backspace tab q w e r t z u i o p ü + enter capslock a s d f g h j k l ö ä # shiftleft < y x c v b n m , . - up shiftright ctrlleft win altleft space altright left down right".split(" ");
-    const toggleableKeys: string[] = "shiftleft shiftright ctrlleft altleft altright".split(" ");
+    let visible: boolean = true;
 </script>
 
-<div class="keyboard bg-gray-800 p-2">
-    {#each keys as key}
-        <KeyboardButton key={key} toggleable={toggleableKeys.includes(key)}/>
-    {/each}
+<div class="keyboard bg-gray-800 p-2 flex flex-col">
+    <button
+            class="text-white self-center pb-1"
+            on:click={() => visible = !visible}
+    >
+        {#if visible}
+            <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        {:else}
+            <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.13523 8.84197C3.3241 9.04343 3.64052 9.05363 3.84197 8.86477L7.5 5.43536L11.158 8.86477C11.3595 9.05363 11.6759 9.04343 11.8648 8.84197C12.0536 8.64051 12.0434 8.32409 11.842 8.13523L7.84197 4.38523C7.64964 4.20492 7.35036 4.20492 7.15803 4.38523L3.15803 8.13523C2.95657 8.32409 2.94637 8.64051 3.13523 8.84197Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        {/if}
+    </button>
+
+    <div
+         class="keys"
+         style={visible ? "display: grid" : "display: none"}
+    >
+        {#each keys as key}
+            <KeyboardButton key={key}/>
+        {/each}
+    </div>
 </div>
 
 <style>
-    .keyboard {
-        display: grid;
-        grid-template-columns: repeat(14, 1fr);
+    .keys {
+        grid-template-columns: repeat(14, 7.1428%);
+        height: 100%;
+    }
+
+    @media (max-height: 450px) {
+        button {
+            height: 10vh;
+            padding-top: 0.7rem;
+        }
+
+        .keys {
+            height: 90vh;
+        }
     }
 </style>
