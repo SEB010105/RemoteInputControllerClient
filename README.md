@@ -1,6 +1,6 @@
 ### Introduction
 
-This is an example frontend implementation, which uses my [remote input controller server](https://github.com/SEB010105/remote-input-controller-client).
+This is an example frontend implementation, which uses my [remote input controller server](https://github.com/SEB010105/remote-input-controller-server).
 
 ### Usage
 
