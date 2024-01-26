@@ -35,12 +35,12 @@
 
     @media (max-height: 450px) {
         button {
-            height: 10vh;
+            height: 10svh;
             padding-top: 0.7rem;
         }
 
         .keys {
-            height: 90vh;
+            height: 90svh;
         }
     }
 </style>

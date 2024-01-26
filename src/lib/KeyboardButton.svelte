@@ -1,19 +1,10 @@
 <script lang="ts">
 
-    import {post, setAllKeyIndexes} from "./publicFunctions";
+    import {post} from "./publicFunctions";
     import {address} from "./adressStore";
     import {Key} from "./key";
 
     export let key: Key;
-
-    function handleToggle() {
-        if (key.toggled)
-            post($address + "/up", {key: key.currentKey});
-        else
-            post($address + "/down", {key: key.currentKey});
-
-        key.toggle();
-    }
 
     function handleDown() {
         if (key.toggleable) {
@@ -64,6 +55,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        user-select: none;
+        transition: 200ms;
     }
 
     @media (max-width: 700px) {
@@ -76,6 +69,7 @@
     button:hover {
         background-color: theme("colors.gray.500");
         border-bottom-color: theme("colors.gray.600");
+        transition: 100ms;
     }
 
     button:active {
