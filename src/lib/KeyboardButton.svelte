@@ -8,7 +8,7 @@
 
     function handleDown() {
         if (key.toggleable) {
-            post($address + (key.toggled ? "/up" : "/down"), {key: key.currentKey});
+            post(toggledPostAddress, {key: key.currentKey});
             key.toggle();
         } else {
             post($address + "/down", {key: key.currentKey});
@@ -16,14 +16,17 @@
     }
 
     function handleUp() {
-        post($address + "/up", {key: key.currentKey});
+        if (!key.toggleable)
+            post($address + "/up", {key: key.currentKey});
     }
 
     let styling: string;
     let content: string;
+    let toggledPostAddress: string;
 
     key.toggled.subscribe(t => {
         styling = t ? "bg-gray-700" : "bg-gray-600";
+        toggledPostAddress = $address + (t ? "/up" : "/down");
 
         if (key.toggleFunctionality)
             key.toggleFunctionality(t);

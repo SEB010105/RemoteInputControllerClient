@@ -237,9 +237,7 @@ export const keys: Key[] = [
         'altleft', 
         undefined, 
         undefined, 
-        true,
-        undefined,
-        value => handleKeyIndexChange(secondaryActive, value)
+        true
         ),
     new Key('space'),
     new Key(
